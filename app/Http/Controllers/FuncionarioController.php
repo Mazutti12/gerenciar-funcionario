@@ -11,7 +11,7 @@ class FuncionarioController extends Controller
     function index()
     {
 
-        $funcionarios = DB::select('select * from funcionarios;');
+        $funcionarios = DB::select('select *, floor(datediff(now(), dtnasc)/365) as idade from funcionarios;');
 
         return view('funcionarios.index', [
             'funcionarios' => $funcionarios
@@ -21,27 +21,22 @@ class FuncionarioController extends Controller
     function show($id, Request $request)
     {
         $funcionarios = DB::select(
-        "SELECT * FROM funcionarios WHERE id = :id",
+        "SELECT * , floor(datediff(now(), dtnasc)/365) as idade FROM funcionarios WHERE id = :id",
             [
                 'id' => $id,
             ]
         );
 
-        $dtnasc = DB::table('funcionarios')->pluck('dtnasc')->all();
+        // $dtnasc = DB::table('funcionarios')->pluck('dtnasc')->all();
 
-        $idade = Carbon::parse($request->dtnasc)->diff(Carbon::now())->y;
-
-
+        // $idade = Carbon::parse($request->dtnasc)->diff(Carbon::now())->y;
 
 
 
         // $request->date_of_birth = "2000-10-25";
         // $age = Carbon::parse($request->date_of_birth)->diff(Carbon::now())->y;
 
-        // dd($age. " Years");
-        // foreach($funcionarios as $funcionario){
-        //     $funcionario->dtnasc
-        // }
+    
 
         return view('funcionarios/show', ['funcionarios' => $funcionarios[0]]);
     }

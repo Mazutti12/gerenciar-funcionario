@@ -6,7 +6,7 @@
 <ul> --}}
     @foreach ($funcionarios as $funcionario)
         <li>
-            {{$funcionario->nome}}  {{$funcionario->cargo}} {{$funcionario->dtnasc}}
+            {{$funcionario->nome}}  {{$funcionario->cargo}} {{$funcionario->idade}}
             <a href="/funcionarios/edit/{{$funcionario->id}}">Editar</a>
             <a href="/funcionarios/show/{{$funcionario->id}}">Ver</a>
             <a href="/funcionarios/destroy/{{$funcionario->id}}">Excluir</a>
